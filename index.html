@@ -4,68 +4,108 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#176b45">
+  <meta name="description" content="School Market : fournitures et livres scolaires, commandes WhatsApp et livraison offerte pendant les trois premiers mois de l'offre.">
   <title>School Market - Fournitures scolaires</title>
+
   <style>
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f5f7f5;
       color: #202820;
+      line-height: 1.5;
     }
-    header {
+
+    header, footer {
       background: #176b45;
       color: white;
-      padding: 20px;
       text-align: center;
+      padding: 22px 15px;
     }
-    header h1 { margin: 0 0 8px; }
-    header p { margin: 0; }
+
+    header h1 { margin: 0 0 6px; }
+
     .hero {
-      padding: 28px 18px;
+      padding: 30px 18px;
       text-align: center;
       background: #e1f2e7;
     }
+
     .hero h2 { color: #176b45; }
-    .container { padding: 20px; max-width: 800px; margin: auto; }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .offer {
+      background: #fff0c2;
+      color: #493600;
+      text-align: center;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      border: 2px solid #edc75a;
+    }
+
+    .offer h2 { margin-top: 0; }
+
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
     }
-    .product {
+
+    .product, .cart, .checkout, .payment, .books {
       background: white;
       border-radius: 12px;
-      padding: 16px 10px;
-      text-align: center;
+      padding: 17px;
       box-shadow: 0 2px 8px #00000010;
+      margin-bottom: 18px;
     }
-    .emoji { font-size: 38px; }
-    .price { color: #176b45; font-weight: bold; }
-    button {
+
+    .product { text-align: center; }
+    .emoji { font-size: 46px; }
+    .price { color: #176b45; font-weight: bold; font-size: 18px; }
+
+    button, .whatsapp-link {
+      display: inline-block;
       background: #176b45;
       color: white;
       border: 0;
       border-radius: 8px;
-      padding: 11px 14px;
+      padding: 12px 15px;
       font-size: 15px;
+      text-decoration: none;
       cursor: pointer;
     }
-    .cart {
-      margin-top: 22px;
-      background: white;
-      padding: 18px;
-      border-radius: 12px;
+
+    button:hover, .whatsapp-link:hover { opacity: 0.88; }
+    .full { width: 100%; }
+    .remove { background: #a52a2a; padding: 5px 9px; }
+    .whatsapp-link { background: #168a46; }
+
+    input, textarea {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 7px 0 15px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      font: inherit;
     }
-    .contact { text-align: center; padding: 24px 12px; }
-    footer {
-      background: #176b45;
-      color: white;
-      text-align: center;
-      padding: 18px;
-    }
+
+    .total { font-size: 20px; }
+    .note { color: #555; font-size: 14px; }
+    .contact { text-align: center; padding: 24px 10px; }
+    .payment { background: #f8faf8; }
+    a { overflow-wrap: anywhere; }
   </style>
 </head>
+
 <body>
   <header>
     <h1>School Market</h1>
@@ -74,82 +114,243 @@
 
   <section class="hero">
     <h2>Préparez la rentrée scolaire</h2>
-    <p>Trouvez les fournitures dont vos enfants ont besoin.</p>
+    <p>Retrouvez les fournitures dont vos enfants ont besoin.</p>
     <button onclick="document.getElementById('boutique').scrollIntoView({behavior:'smooth'})">
-      Voir les produits
+      Découvrir la boutique
     </button>
   </section>
 
-  <main class="container" id="boutique">
-    <h2>Notre boutique</h2>
-    <div class="products">
-      <div class="product">
-        <div class="emoji">📓</div>
-        <h3>Cahier</h3>
-        <p class="price">500 FCFA</p>
-        <button onclick="ajouter('Cahier',500)">Ajouter</button>
+  <main class="container">
+
+    <section class="offer">
+      <h2>🎉 Offre spéciale de lancement !</h2>
+      <p><strong>0 FCFA de frais de livraison pendant les 3 premiers mois de l'offre !</strong></p>
+      <p>Profitez de cette offre pendant la période de lancement de School Market.</p>
+      <p class="note">
+        Offre valable pendant trois mois à compter de son lancement.
+        Les modalités de livraison seront confirmées lors de la commande.
+      </p>
+    </section>
+
+    <section id="boutique">
+      <h2>🛍️ Notre boutique</h2>
+
+      <div class="products">
+        <article class="product">
+          <div class="emoji">📓</div>
+          <h3>Cahier</h3>
+          <p class="price">500 FCFA</p>
+          <button onclick="ajouter('Cahier', 500)">Ajouter au panier</button>
+        </article>
+
+        <article class="product">
+          <div class="emoji">🎒</div>
+          <h3>Sac scolaire</h3>
+          <p class="price">5 000 FCFA</p>
+          <button onclick="ajouter('Sac scolaire', 5000)">Ajouter au panier</button>
+        </article>
+
+        <article class="product">
+          <div class="emoji">📐</div>
+          <h3>Ensemble géométrique</h3>
+          <p class="price">1 200 FCFA</p>
+          <button onclick="ajouter('Ensemble géométrique', 1200)">Ajouter au panier</button>
+        </article>
       </div>
-      <div class="product">
-        <div class="emoji">✏️</div>
-        <h3>Crayons</h3>
-        <p class="price">250 FCFA</p>
-        <button onclick="ajouter('Crayons',250)">Ajouter</button>
-      </div>
-      <div class="product">
-        <div class="emoji">🎒</div>
-        <h3>Sac scolaire</h3>
-        <p class="price">5000 FCFA</p>
-        <button onclick="ajouter('Sac scolaire',5000)">Ajouter</button>
-      </div>
-      <div class="product">
-        <div class="emoji">📐</div>
-        <h3>Règle</h3>
-        <p class="price">300 FCFA</p>
-        <button onclick="ajouter('Règle',300)">Ajouter</button>
-      </div>
-    </div>
+    </section>
+
+    <section class="books">
+      <h2>📚 Livres scolaires sur demande</h2>
+      <p>
+        Vous recherchez un manuel scolaire, un livre de lecture
+        ou un cahier d'exercices ?
+      </p>
+      <p>
+        Envoyez-nous le titre du livre, la classe et la matière.
+        Nous vous confirmerons sa disponibilité et son prix.
+      </p>
+      <a class="whatsapp-link"
+         href="https://wa.me/2250574865907?text=Bonjour%20School%20Market%2C%20je%20recherche%20un%20livre%20scolaire."
+         target="_blank" rel="noopener noreferrer">
+        Demander un livre sur WhatsApp
+      </a>
+    </section>
 
     <section class="cart">
-      <h2>Mon panier</h2>
+      <h2>🛒 Mon panier</h2>
+      <p id="panier-vide">Votre panier est vide.</p>
       <ul id="liste"></ul>
-      <p>Total : <strong id="total">0 FCFA</strong></p>
-      <button onclick="commander()">Préparer ma commande</button>
-      <p id="message"></p>
+      <p class="total">Total des articles : <strong id="total">0 FCFA</strong></p>
+      <p>Livraison : <strong>0 FCFA pendant l'offre de lancement</strong></p>
+      <p class="note">Le total affiché concerne les articles. La livraison est offerte selon les conditions de l'offre.</p>
+      <button class="full" type="button" onclick="viderPanier()">Vider le panier</button>
+      <p id="message" role="status"></p>
+    </section>
+
+    <section class="checkout">
+      <h2>📦 Passer une commande</h2>
+      <p>Remplissez vos informations pour préparer votre commande WhatsApp.</p>
+
+      <form id="commande-form">
+        <label for="nom">Nom complet du parent</label>
+        <input id="nom" name="nom" autocomplete="name" required
+               placeholder="Votre nom complet">
+
+        <label for="telephone">Votre numéro de téléphone</label>
+        <input id="telephone" name="telephone" type="tel"
+               autocomplete="tel" required placeholder="Ex. : 07 XX XX XX XX">
+
+        <label for="adresse">Adresse de livraison</label>
+        <textarea id="adresse" name="adresse" rows="3" required
+                  placeholder="Commune, quartier et point de repère"></textarea>
+
+        <label for="notes">Précisions sur la commande (facultatif)</label>
+        <textarea id="notes" name="notes" rows="2"
+                  placeholder="Quantités ou autres renseignements"></textarea>
+
+        <div class="payment">
+          <h3>💵 Mode de paiement</h3>
+          <p>✅ <strong>Paiement à la livraison</strong></p>
+          <p>Vous réglez votre commande à sa réception.</p>
+
+          <h3>💳 Carte Visa</h3>
+          <p><strong>Paiement Visa en ligne : bientôt disponible.</strong></p>
+          <p class="note">
+            Le paiement par carte sera activé après la mise en place
+            d'un service de paiement sécurisé.
+          </p>
+        </div>
+
+        <button type="submit" class="full">
+          Préparer ma commande sur WhatsApp
+        </button>
+      </form>
+
+      <p class="note">
+        WhatsApp ouvrira un message prérempli. Vous devrez appuyer
+        sur « Envoyer » pour transmettre votre commande.
+      </p>
     </section>
 
     <section class="contact">
-      <h2>Livraison</h2>
-      <p>Une boutique en ligne pour faciliter vos achats scolaires.</p>
-      <p>Les prix affichés sont des exemples à personnaliser.</p>
+      <h2>📞 Nous contacter</h2>
+      <p>Une question sur un produit, un livre ou une livraison ?</p>
+      <p><strong>WhatsApp : +225 05 74 86 59 07</strong></p>
+      <a class="whatsapp-link"
+         href="https://wa.me/2250574865907"
+         target="_blank" rel="noopener noreferrer">
+        Contacter School Market
+      </a>
     </section>
+
   </main>
 
   <footer>
     <p>© 2026 School Market</p>
+    <p>Vos fournitures scolaires en toute simplicité.</p>
   </footer>
 
   <script>
-    let total = 0;
     const panier = [];
 
-    function ajouter(nom, prix) {
-      panier.push({nom, prix});
-      total += prix;
-      document.getElementById('liste').innerHTML =
-        panier.map(p => `<li>${p.nom} — ${p.prix} FCFA</li>`).join('');
-      document.getElementById('total').textContent =
-        total.toLocaleString('fr-FR') + ' FCFA';
-      document.getElementById('message').textContent =
-        'Article ajouté au panier.';
+    function formater(prix) {
+      return prix.toLocaleString('fr-FR') + ' FCFA';
     }
 
-    function commander() {
-      document.getElementById('message').textContent =
-        panier.length
-        ? 'Votre panier contient ' + panier.length +
-          ' article(s). Le paiement et la livraison seront configurés ensuite.'
-        : 'Ajoutez d’abord un article à votre panier.';
+    function afficherPanier() {
+      const liste = document.getElementById('liste');
+      const vide = document.getElementById('panier-vide');
+      const total = panier.reduce((somme, article) => somme + article.prix, 0);
+
+      vide.hidden = panier.length > 0;
+      liste.replaceChildren();
+
+      panier.forEach((article, index) => {
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(
+          article.nom + ' — ' + formater(article.prix) + ' '
+        ));
+
+        const bouton = document.createElement('button');
+        bouton.type = 'button';
+        bouton.className = 'remove';
+        bouton.textContent = 'Retirer';
+        bouton.setAttribute('aria-label', 'Retirer ' + article.nom);
+
+        bouton.addEventListener('click', () => {
+          panier.splice(index, 1);
+          afficherPanier();
+        });
+
+        li.appendChild(bouton);
+        liste.appendChild(li);
+      });
+
+      document.getElementById('total').textContent = formater(total);
     }
+
+    function ajouter(nom, prix) {
+      panier.push({ nom, prix });
+      afficherPanier();
+      document.getElementById('message').textContent =
+        nom + ' ajouté au panier.';
+    }
+
+    function viderPanier() {
+      panier.length = 0;
+      afficherPanier();
+      document.getElementById('message').textContent = 'Panier vidé.';
+    }
+
+    document.getElementById('commande-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (panier.length === 0) {
+        document.getElementById('message').textContent =
+          'Ajoutez d’abord un produit à votre panier.';
+        document.getElementById('boutique').scrollIntoView({behavior: 'smooth'});
+        return;
+      }
+
+      const nom = document.getElementById('nom').value.trim();
+      const telephone = document.getElementById('telephone').value.trim();
+      const adresse = document.getElementById('adresse').value.trim();
+      const notes = document.getElementById('notes').value.trim();
+      const total = panier.reduce((somme, article) => somme + article.prix, 0);
+
+      const articles = panier.map(article =>
+        '- ' + article.nom + ' : ' + formater(article.prix)
+      );
+
+      const lignes = [
+        'Bonjour School Market ! Je souhaite passer une commande.',
+        '',
+        'Nom : ' + nom,
+        'Téléphone : ' + telephone,
+        'Adresse de livraison : ' + adresse,
+        '',
+        'Articles commandés :',
+        ...articles,
+        '',
+        'Total des articles : ' + formater(total),
+        'Frais de livraison : 0 FCFA (offre de lancement, selon conditions)',
+        'Mode de paiement : à la livraison',
+        notes ? 'Précisions : ' + notes : '',
+        '',
+        'Merci de confirmer ma commande.'
+      ].filter(Boolean);
+
+      const url = 'https://wa.me/2250574865907?text=' +
+        encodeURIComponent(lignes.join('\n'));
+
+      const fenetre = window.open(url, '_blank');
+
+      if (!fenetre) {
+        window.location.href = url;
+      }
+    });
+
+    afficherPanier();
   </script>
 </body>
 </html>
