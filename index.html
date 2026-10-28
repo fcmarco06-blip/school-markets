@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#176b45">
+  <title>School Market - Fournitures scolaires</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7f5;
+      color: #202820;
+    }
+    header {
+      background: #176b45;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 { margin: 0 0 8px; }
+    header p { margin: 0; }
+    .hero {
+      padding: 28px 18px;
+      text-align: center;
+      background: #e1f2e7;
+    }
+    .hero h2 { color: #176b45; }
+    .container { padding: 20px; max-width: 800px; margin: auto; }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+      gap: 14px;
+    }
+    .product {
+      background: white;
+      border-radius: 12px;
+      padding: 16px 10px;
+      text-align: center;
+      box-shadow: 0 2px 8px #00000010;
+    }
+    .emoji { font-size: 38px; }
+    .price { color: #176b45; font-weight: bold; }
+    button {
+      background: #176b45;
+      color: white;
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .cart {
+      margin-top: 22px;
+      background: white;
+      padding: 18px;
+      border-radius: 12px;
+    }
+    .contact { text-align: center; padding: 24px 12px; }
+    footer {
+      background: #176b45;
+      color: white;
+      text-align: center;
+      padding: 18px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>School Market</h1>
+    <p>Les fournitures scolaires, simplement !</p>
+  </header>
+
+  <section class="hero">
+    <h2>Préparez la rentrée scolaire</h2>
+    <p>Trouvez les fournitures dont vos enfants ont besoin.</p>
+    <button onclick="document.getElementById('boutique').scrollIntoView({behavior:'smooth'})">
+      Voir les produits
+    </button>
+  </section>
+
+  <main class="container" id="boutique">
+    <h2>Notre boutique</h2>
+    <div class="products">
+      <div class="product">
+        <div class="emoji">📓</div>
+        <h3>Cahier</h3>
+        <p class="price">500 FCFA</p>
+        <button onclick="ajouter('Cahier',500)">Ajouter</button>
+      </div>
+      <div class="product">
+        <div class="emoji">✏️</div>
+        <h3>Crayons</h3>
+        <p class="price">250 FCFA</p>
+        <button onclick="ajouter('Crayons',250)">Ajouter</button>
+      </div>
+      <div class="product">
+        <div class="emoji">🎒</div>
+        <h3>Sac scolaire</h3>
+        <p class="price">5000 FCFA</p>
+        <button onclick="ajouter('Sac scolaire',5000)">Ajouter</button>
+      </div>
+      <div class="product">
+        <div class="emoji">📐</div>
+        <h3>Règle</h3>
+        <p class="price">300 FCFA</p>
+        <button onclick="ajouter('Règle',300)">Ajouter</button>
+      </div>
+    </div>
+
+    <section class="cart">
+      <h2>Mon panier</h2>
+      <ul id="liste"></ul>
+      <p>Total : <strong id="total">0 FCFA</strong></p>
+      <button onclick="commander()">Préparer ma commande</button>
+      <p id="message"></p>
+    </section>
+
+    <section class="contact">
+      <h2>Livraison</h2>
+      <p>Une boutique en ligne pour faciliter vos achats scolaires.</p>
+      <p>Les prix affichés sont des exemples à personnaliser.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 School Market</p>
+  </footer>
+
+  <script>
+    let total = 0;
+    const panier = [];
+
+    function ajouter(nom, prix) {
+      panier.push({nom, prix});
+      total += prix;
+      document.getElementById('liste').innerHTML =
+        panier.map(p => `<li>${p.nom} — ${p.prix} FCFA</li>`).join('');
+      document.getElementById('total').textContent =
+        total.toLocaleString('fr-FR') + ' FCFA';
+      document.getElementById('message').textContent =
+        'Article ajouté au panier.';
+    }
+
+    function commander() {
+      document.getElementById('message').textContent =
+        panier.length
+        ? 'Votre panier contient ' + panier.length +
+          ' article(s). Le paiement et la livraison seront configurés ensuite.'
+        : 'Ajoutez d’abord un article à votre panier.';
+    }
+  </script>
+</body>
+</html>
